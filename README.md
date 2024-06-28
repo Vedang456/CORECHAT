@@ -1,4 +1,4 @@
-# chatting
+# CORECHAT
 Write a program for multiple people to exchange chat messages with each other
 
 Things which are expected
