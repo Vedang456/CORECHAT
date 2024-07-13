@@ -20,7 +20,7 @@ def current_time():
 
 def Add_Message(msg):
     url = "http://localhost:5000/messages"
-    payload = {"To": "Maguu","From": "Gaguu"}
+    payload = {"To": "Maguu","From": "Gaguu", "Message": msg}
     response = requests.post(url, json=payload)
     print(response.json())
 
