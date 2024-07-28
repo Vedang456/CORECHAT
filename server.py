@@ -2,8 +2,8 @@ from flask import Flask, request, jsonify
 import os
 import json
 
-MESSAGES_FILE = "messages.txt"
-USERS_FILE = "Users.txt"
+MESSAGES_FILE = "messages.json"
+USERS_FILE = "Users.json"
 app = Flask("d")
 
 def load_users():

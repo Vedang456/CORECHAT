@@ -2,9 +2,6 @@ import requests
 import json
 from time import strftime ,gmtime
 
-MESSAGES_FILE = "messages.txt"
-USERS_FILE = "Users.txt"
-
 def main_menu():
     print("\nMain Menu:")
     print("1. Register")
