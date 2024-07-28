@@ -1,1 +1,16 @@
-[]
+[
+    {
+        "first_name": "Vedang",
+        "last_name": "Limaye",
+        "username": "Theoker",
+        "password": "vEd@nG2))4",
+        "email": "theoker9@gmail.com"
+    },
+    {
+        "first_name": "Prasad",
+        "last_name": "Limaye",
+        "username": "Velichababa",
+        "password": "vedang2004",
+        "email": "pralim@gmail.com"
+    }
+]

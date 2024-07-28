@@ -48,7 +48,17 @@ def List_Users():
 
 @app.route("/Login",methods = ['POST'])
 def Login():
-    return jsonify("User logged in") , 201
+    data = request.json
+    x = load_users()
+    for User_entry  in x:
+        if User_entry["username"]  ==  data["username"]:
+            if User_entry["password"]==  data["password"]:
+                return jsonify("User logged in") , 201
+            else:
+                return jsonify("Wrong Password"), 404
+    else:
+        return jsonify("Invalid User"), 404
+    
     
 
 @app.route("/messages",methods = ['POST'])

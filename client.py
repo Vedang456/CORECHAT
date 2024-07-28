@@ -61,12 +61,12 @@ def Login():
     username = input("Username: ").strip()
     password = input("Password: ").strip()
     
-    data = {
+    payload = {
         "username": username,
         "password": password
     }
     
-    response = requests.post(url, json=data)
+    response = requests.post(url, json= payload)
     print(response.json())
 
 
