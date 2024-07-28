@@ -1,8 +1,6 @@
+from flask import Flask, request, jsonify, render_template
 import os
 import json
-from flask import Flask ,request, jsonify
-
-
 
 MESSAGES_FILE = "messages.txt"
 USERS_FILE = "Users.txt"
@@ -68,3 +66,9 @@ def List_Messages():
     messages = load_messages()
     return messages , 200
 
+# @app.route('/')
+# def index():
+#     return render_template('index.html')
+
+# if __name__ == "__main__":
+#     app.run(debug=True)
