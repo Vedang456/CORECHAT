@@ -1,10 +1,18 @@
 from flask import Flask, request, jsonify
 import os
 import json
+import secrets
+import string
 
 MESSAGES_FILE = "messages.json"
 USERS_FILE = "Users.json"
 app = Flask("d")
+
+
+def generate_register_id(length=16):
+    characters = string.ascii_letters + string.digits
+    return ''.join(secrets.choice(characters) for _ in range(length))
+                   
 
 def load_users():
     if os.path.exists(USERS_FILE):
@@ -34,6 +42,8 @@ def save_messages(messages):
 def Register():
     data = request.json
     Users  = load_users()
+    RegisterID = generate_register_id()
+    data["RegisterID"] = RegisterID
     Users.append(data)
     save_users(Users)
     return jsonify("User Registered Succesfully") , 201
@@ -75,3 +85,4 @@ def Add_Message():
 def List_Messages():
     messages = load_messages()
     return messages , 200
+
