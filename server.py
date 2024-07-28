@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from datetime import datetime, timedelta, timezone
 import os
 import json
 import secrets
@@ -7,6 +8,19 @@ import string
 MESSAGES_FILE = "messages.json"
 USERS_FILE = "Users.json"
 app = Flask("d")
+
+
+
+def Token_get(RegisterID):
+    current_time = datetime.now(timezone.utc)
+    var = current_time.strftime("%Y-%m-%d %H:%M:%S")
+    expiry_time = (current_time + timedelta(hours=3)).strftime("%Y-%m-%d %H:%M:%S")
+    Token = {
+        "TokenIssued": var,
+        "TokenExpiry": expiry_time,
+        "RegisterID": RegisterID
+    }
+    return Token
 
 
 def generate_register_id(length=16):
@@ -55,7 +69,6 @@ def List_Users():
     return Users , 200
 
 
-
 @app.route("/Login",methods = ['POST'])
 def Login():
     data = request.json
@@ -63,7 +76,8 @@ def Login():
     for User_entry  in x:
         if User_entry["username"]  ==  data["username"]:
             if User_entry["password"]==  data["password"]:
-                return jsonify("User logged in") , 201
+                
+                return Token_get(User_entry['RegisterID']) , 200
             else:
                 return jsonify("Wrong Password"), 404
     else:
@@ -85,4 +99,3 @@ def Add_Message():
 def List_Messages():
     messages = load_messages()
     return messages , 200
-

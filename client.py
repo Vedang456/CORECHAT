@@ -20,13 +20,15 @@ def Add_Message(msg):
     url = "http://localhost:5000/messages"
     payload = {"To": "Maguu","From": "Gaguu", "Message": msg}
     response = requests.post(url, json=payload)
-    print(response.json())
+    if response.status_code == 201:
+        print(response.json())
 
 
 def List_Messages():
     url = "http://localhost:5000/messages"
     response = requests.get(url)
-    print(json.dumps(response.json() , indent=4))
+    if response.status_code == 200:
+        print(json.dumps(response.json() , indent=4))
 
 
 def Register():
@@ -47,7 +49,8 @@ def Register():
     }
 
     response = requests.post(url, json=payload)
-    print(response.json())
+    if response.status_code == 201:
+        print(response.json())
     
 def List_Users():
     url = "http://localhost:5000/Users"
@@ -55,7 +58,7 @@ def List_Users():
     print(json.dumps(response.json(), indent=4))
 
     
-    
+ 
 def Login():
     url = "http://localhost:5000/Login"
     username = input("Username: ").strip()
@@ -67,7 +70,12 @@ def Login():
     }
     
     response = requests.post(url, json= payload)
-    print(response.json())
+    if response.status_code == 200:
+         with open('Login.json', "w") as file:
+            json.dump(response.json(),file)
+            print("User Logged in succesfully")
+            return(True) 
+    return(False)
 
 
 
