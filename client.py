@@ -10,15 +10,17 @@ def main_menu():
 
 def message_menu():
     print("\nMessage Menu:")
-    print("1. Add a message")
+    print("1. send a message")
     print("2. List Messages")
     print("3. List Users")
     print("4. Logout")
 
 
-def Add_Message(msg):
+def Send_Message(msg):
+    # Sender = 'Login()'
+    # Reciever = 'users.json'
     url = "http://localhost:5000/messages"
-    payload = {"To": "Maguu","From": "Gaguu", "Message": msg}
+    payload = {"To": 'Reciever' ,"From": 'Sender' , "Message": msg}
     response = requests.post(url, json=payload)
     if response.status_code == 201:
         print(response.json())
@@ -100,7 +102,7 @@ def main():
             choice = input("Choose an option (1-4): ")
             if choice == '1':
                 messages = input("Enter message:")
-                Add_Message(messages)
+                Send_Message(messages)
             elif choice == '2':
                 List_Messages()
             elif choice == '3':
