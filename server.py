@@ -54,8 +54,8 @@ def Token_get(RegisterID):
 @app.route("/Login",methods = ['POST'])
 def Login():
     data = request.json
-    x = collection2.find_one({"username": data["username"]})
-    for User_entry  in x:
+    User_entry = collection2.find_one({"username": data["username"]})
+    if User_entry != None:
         if User_entry["password"] ==  data["password"]:        
             return Token_get(User_entry['RegisterID']) , 200
         else:
