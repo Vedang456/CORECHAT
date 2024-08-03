@@ -52,7 +52,8 @@ def Register():
 
     response = requests.post(url, json=payload)
     if response.status_code == 201:
-        print(response.json())
+        if response != None:
+            print(response.json())
     
 def List_Users():
     url = "http://localhost:5000/Users"

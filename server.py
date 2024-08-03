@@ -1,14 +1,42 @@
 from flask import Flask, request, jsonify
 from datetime import datetime, timedelta, timezone
-import os
-import json
 import secrets
 import string
+from pymongo import MongoClient
 
-MESSAGES_FILE = "messages.json"
-USERS_FILE = "Users.json"
+
+client = MongoClient('mongodb://localhost:27017/')
+db = client['Chat_Application']
+collection1 = db['Messages']
+collection2 = db['Users']
+
 app = Flask("d")
 
+
+def generate_register_id(length=16):
+    characters = string.ascii_letters + string.digits
+    return ''.join(secrets.choice(characters) for _ in range(length))
+                   
+
+
+@app.route("/Register",methods = ['POST'])
+def Register():
+    data = request.json
+    RegisterID = generate_register_id()
+    data["RegisterID"] = RegisterID
+    existing_user = collection2.find_one({"username": data["username"]})
+    print(existing_user)
+    if existing_user:
+        return "This user already exists" , 409
+    else:
+        y = collection2.insert_one(data)
+        return jsonify("User Added Succesfully") , 201
+
+
+@app.route("/Users",methods = ['GET'])
+def List_Users():
+    User = list(collection2.find({}))
+    return jsonify(User) , 200
 
 
 def Token_get(RegisterID):
@@ -23,79 +51,35 @@ def Token_get(RegisterID):
     return Token
 
 
-def generate_register_id(length=16):
-    characters = string.ascii_letters + string.digits
-    return ''.join(secrets.choice(characters) for _ in range(length))
-                   
-
-def load_users():
-    if os.path.exists(USERS_FILE):
-        with open(USERS_FILE, "r") as file:
-            return json.load(file)
-    return {}
-
-def save_users(Users):
-    with open(USERS_FILE, "w") as file:
-        json.dump(Users, file)
-
-
-def load_messages():
-    if os.path.exists(MESSAGES_FILE):
-        with open(MESSAGES_FILE, "r") as file:
-            data = json.load(file)
-            return data
-    return []
-
-def save_messages(messages):
-    with open(MESSAGES_FILE, "w") as file:
-        json.dump(messages,file)
-
-
-
-@app.route("/Register",methods = ['POST'])
-def Register():
-    data = request.json
-    Users  = load_users()
-    RegisterID = generate_register_id()
-    data["RegisterID"] = RegisterID
-    Users.append(data)
-    save_users(Users)
-    return jsonify("User Registered Succesfully") , 201
-
-
-@app.route("/Users",methods = ['GET'])
-def List_Users():
-    Users = load_users()
-    return Users , 200
-
-
 @app.route("/Login",methods = ['POST'])
 def Login():
     data = request.json
-    x = load_users()
+    x = collection2.find_one({"username": data["username"]})
     for User_entry  in x:
-        if User_entry["username"]  ==  data["username"]:
-            if User_entry["password"]==  data["password"]:
-                
-                return Token_get(User_entry['RegisterID']) , 200
-            else:
-                return jsonify("Wrong Password"), 404
+        if User_entry["password"] ==  data["password"]:        
+            return Token_get(User_entry['RegisterID']) , 200
+        else:
+            return jsonify("Wrong Password"), 404
     else:
         return jsonify("Invalid User"), 404
     
     
 
-@app.route("/messages",methods = ['POST'])
-def Add_Message():
-    data = request.json
-    messages = load_messages()
-    messages.append(data)
-    save_messages(messages)
-    return jsonify("Message has been added.") , 201
+# @app.route("/messages",methods = ['POST'])
+# def Add_Message():
+#     data = request.json
+#     messages = load_messages()
+#     messages.append(data)
+#     save_messages(messages)
+#     return jsonify("Message has been added.") , 201
     
 
 
-@app.route("/messages",methods = ['GET'])
-def List_Messages():
-    messages = load_messages()
-    return messages , 200
+# @app.route("/messages",methods = ['GET'])
+# def List_Messages():
+#     messages = load_messages()
+#     return messages , 200
+
+
+
+
