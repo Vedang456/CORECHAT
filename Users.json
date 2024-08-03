@@ -16,6 +16,38 @@
         "RegisterID": "T7y7uow3ZLsPsqxR"
     },
     {
+        "first_name": "Aaditya",
+        "last_name": "Mehta",
+        "username": "aadimehta@gmail.com",
+        "password": ":sXHPmINj.",
+        "email": "alexsmith50@example.com",
+        "RegisterID": "kPwdKnTxRKpNa5MJ"
+    },
+    {
+        "first_name": "Tejal",
+        "last_name": "Limaye",
+        "username": "VelichiAai",
+        "password": "v",
+        "email": "limaye.tejal@gmail.com",
+        "RegisterID": "ebnPnl35drhqT2zb"
+    },
+    {
+        "first_name": "Ayush",
+        "last_name": "Patil",
+        "username": "Ap",
+        "password": "123",
+        "email": "asp@gmail.com",
+        "RegisterID": "VO1jTYvhaaT9qRGX"
+    },
+    {
+        "first_name": "1",
+        "last_name": "2",
+        "username": "3",
+        "password": "4",
+        "email": "5",
+        "RegisterID": "oXAxCMeHH5CKYvUI"
+    },
+    {
         "first_name": "Chris",
         "last_name": "Miller",
         "username": "chrismiller3",
@@ -390,29 +422,5 @@
         "password": "^=HW}YH[)d",
         "email": "mikedavis49@mail.com",
         "RegisterID": "3yA3msn8G9QJrxvh"
-    },
-    {
-        "first_name": "Alex",
-        "last_name": "Smith",
-        "username": "alexsmith50",
-        "password": ":sXHPmINj.",
-        "email": "alexsmith50@example.com",
-        "RegisterID": "kPwdKnTxRKpNa5MJ"
-    },
-    {
-        "first_name": "1",
-        "last_name": "2",
-        "username": "3",
-        "password": "4",
-        "email": "5",
-        "RegisterID": "oXAxCMeHH5CKYvUI"
-    },
-    {
-        "first_name": "Tejal",
-        "last_name": "Limaye",
-        "username": "VelichiAai",
-        "password": "v",
-        "email": "limaye.tejal@gmail.com",
-        "RegisterID": "ebnPnl35drhqT2zb"
     }
 ]
