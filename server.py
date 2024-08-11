@@ -69,10 +69,18 @@ def Login():
     
 
 @app.route("/messages",methods = ['POST'])
-def Add_Message():
+def Send_Message():
     data = request.json
-    x = collection1.insert_one(data)
-    return jsonify("Message has been added.") , 201
+    Token = data["Token"]
+    User_record = collection2.find_one({"RegisterID": Token["RegisterID"]})
+    record = {
+                "To": data["To"],
+                "From": User_record["username"],
+                "Message": data["Message"]
+    }
+    
+    x = collection1.insert_one(record)
+    return jsonify("Message has been sent.") , 201
     
 
 
@@ -83,6 +91,8 @@ def List_Messages():
     for m in Messages:
         Printable_Messages.append(m)
     return Printable_Messages, 200
+
+
 
 
 

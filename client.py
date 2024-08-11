@@ -1,6 +1,6 @@
 import requests
 import json
-
+Token = {}
 
 def main_menu():
     print("\nMain Menu:")
@@ -14,23 +14,6 @@ def message_menu():
     print("2. List Messages")
     print("3. List Users")
     print("4. Logout")
-
-
-def Send_Message(msg):
-    # Sender = 'Login()'
-    # Reciever = 'users.json'
-    url = "http://localhost:5000/messages"
-    payload = {"To": 'Reciever' ,"From": 'Sender' , "Message": msg}
-    response = requests.post(url, json=payload)
-    if response.status_code == 201:
-        print(response.json())
-
-
-def List_Messages():
-    url = "http://localhost:5000/messages"
-    response = requests.get(url)
-    if response.status_code == 200:
-        print(json.dumps(response.json() , indent=4))
 
 
 def Register():
@@ -54,15 +37,10 @@ def Register():
     if response.status_code == 201:
         if response != None:
             print(response.json())
-    
-def List_Users():
-    url = "http://localhost:5000/Users"
-    response = requests.get(url)
-    print(json.dumps(response.json(), indent=4))
-
-    
- 
+        
+        
 def Login():
+    global Token
     url = "http://localhost:5000/Login"
     username = input("Username: ").strip()
     password = input("Password: ").strip()
@@ -74,12 +52,41 @@ def Login():
     
     response = requests.post(url, json= payload)
     if response.status_code == 200:
-         with open('Login.json', "w") as file:
-            json.dump(response.json(),file)
-            print("User Logged in succesfully")
-            return(True) 
+        Token = response.json()
+        print(Token)
+        # with open('Login.json', "w") as file:
+            # json.dump(response.json(),file)
+        print("User Logged in succesfully")
+        return(True) 
     return(False)
 
+
+    
+def List_Users():
+    url = "http://localhost:5000/Users"
+    response = requests.get(url)
+    print(json.dumps(response.json(), indent=4))
+
+    
+
+
+def Send_Message(msg):
+    global Token
+    # Reciever = 'users.json'
+    print(Token)
+    url = "http://localhost:5000/messages"
+    payload = {"To": 'Vedang', "Token": Token, "Message": msg}
+    response = requests.post(url, json=payload)
+    if response.status_code == 201:
+        print(response.json())
+
+
+def List_Messages():
+    url = "http://localhost:5000/messages"
+    payload = {"Token": Token}
+    response = requests.get(url, json=payload)
+    if response.status_code == 200:
+        print(json.dumps(response.json() , indent=4))
 
 
 
