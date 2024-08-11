@@ -10,7 +10,7 @@ def main_menu():
 
 def message_menu():
     print("\nMessage Menu:")
-    print("1. send a message")
+    print("1. Send message")
     print("2. List Messages")
     print("3. List Users")
     print("4. Logout")

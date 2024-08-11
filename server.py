@@ -30,13 +30,16 @@ def Register():
         return "This user already exists" , 409
     else:
         y = collection2.insert_one(data)
-        return jsonify("User Added Succesfully") , 201
+        return jsonify(y + "Added Succesfully") , 201
 
 
 @app.route("/Users",methods = ['GET'])
 def List_Users():
-    User = list(collection2.find({}))
-    return jsonify(User) , 200
+    Printable_Users = []
+    Users = list(collection2.find({},{"username": 1}))
+    for u in Users:
+        Printable_Users.append(u["username"])
+    return Printable_Users, 200
 
 
 def Token_get(RegisterID):
@@ -65,20 +68,22 @@ def Login():
     
     
 
-# @app.route("/messages",methods = ['POST'])
-# def Add_Message():
-#     data = request.json
-#     messages = load_messages()
-#     messages.append(data)
-#     save_messages(messages)
-#     return jsonify("Message has been added.") , 201
+@app.route("/messages",methods = ['POST'])
+def Add_Message():
+    data = request.json
+    x = collection1.insert_one(data)
+    return jsonify("Message has been added.") , 201
     
 
 
-# @app.route("/messages",methods = ['GET'])
-# def List_Messages():
-#     messages = load_messages()
-#     return messages , 200
+@app.route("/messages",methods = ['GET'])
+def List_Messages():
+    Printable_Messages = []
+    Messages = list(collection1.find({},{"_id":0}))
+    for m in Messages:
+        Printable_Messages.append(m)
+    return Printable_Messages, 200
+
 
 
 
