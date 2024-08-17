@@ -74,13 +74,12 @@ def Send_Message():
     Token = data["Token"]
     From_User = collection2.find_one({"RegisterID": Token["RegisterID"]})
     To_User = collection2.find_one({"username": data["User"]})
-    print(To_User)
-    print(From_User)
     if To_User != None and From_User != None:
         record = {
                     "To": To_User["username"],
                     "From": From_User["username"],
-                    "Message": data["Message"]
+                    "Message": data["Message"],
+                    "Timestamp" : datetime.now(timezone.utc)
         }
         x = collection1.insert_one(record)
         return jsonify("Message has been sent.") , 201
@@ -91,6 +90,7 @@ def Send_Message():
 
 @app.route("/messages",methods = ['GET'])
 def List_Messages():
+    collection1.find
     Printable_Messages = []
     Messages = list(collection1.find({},{"_id":0}))
     for m in Messages:

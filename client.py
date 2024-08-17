@@ -81,7 +81,6 @@ def Send_Message(msg,u):
     global Token
     # Reciever = 'users.json'
     url = "http://localhost:5000/messages"
-    print("Before sending mssg  ", u)
     payload = {"User": u, "Token": Token, "Message": msg}
     response = requests.post(url, json=payload)
     if response.status_code == 201:
