@@ -1,4 +1,5 @@
 import requests
+import getpass
 import json
 Token = {}
 
@@ -22,7 +23,7 @@ def Register():
     first_name = input("First Name: ").strip()
     last_name = input("Last Name: ").strip()
     username = input("Username: ").strip()
-    password = input("Password: ").strip()
+    password = getpass.getpass("Enter your password: ").strip()
     email = input("Email: ").strip()
 
     payload = {
@@ -43,7 +44,7 @@ def Login():
     global Token
     url = "http://localhost:5000/Login"
     username = input("Username: ").strip()
-    password = input("Password: ").strip()
+    password = getpass.getpass("Enter your password: ").strip()
     
     payload = {
         "username": username,
