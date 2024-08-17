@@ -63,13 +63,17 @@ def Choose_Users():
     url = "http://localhost:5000/Users"
     response = requests.get(url)
     Python_List = json.loads(response.content)
+    print(0 ,":","Exit")
     for p in Python_List:
         print(i, ":", p)
         i += 1
     print("Whom do you want to communicate with?")
     c = int(input())
+    if c == 0:
+        exit()    
     c = c-1   
-    return(Python_List[c]) 
+    return(Python_List[c])
+
 
     
 
