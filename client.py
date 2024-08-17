@@ -13,6 +13,7 @@ def User_menu():
     u = Choose_Users()
     print(u)
     List_Messages(u)
+    return(u)
 
 
 def Register():
@@ -76,13 +77,12 @@ def Choose_Users():
 
 
     
-
-
 def Send_Message(msg,u):
     global Token
     # Reciever = 'users.json'
     url = "http://localhost:5000/messages"
-    payload = {"To": u, "Token": Token, "Message": msg}
+    print("Before sending mssg  ", u)
+    payload = {"User": u, "Token": Token, "Message": msg}
     response = requests.post(url, json=payload)
     if response.status_code == 201:
         print(response.json())

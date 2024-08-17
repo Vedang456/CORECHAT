@@ -72,14 +72,20 @@ def Login():
 def Send_Message():
     data = request.json
     Token = data["Token"]
-    User_record = collection2.find_one({"RegisterID": Token["RegisterID"]})
-    record = {
-                "To": data["To"],
-                "From": User_record["username"],
-                "Message": data["Message"]
-    }
-    x = collection1.insert_one(record)
-    return jsonify("Message has been sent.") , 201
+    From_User = collection2.find_one({"RegisterID": Token["RegisterID"]})
+    To_User = collection2.find_one({"username": data["User"]})
+    print(To_User)
+    print(From_User)
+    if To_User != None and From_User != None:
+        record = {
+                    "To": To_User["username"],
+                    "From": From_User["username"],
+                    "Message": data["Message"]
+        }
+        x = collection1.insert_one(record)
+        return jsonify("Message has been sent.") , 201
+    else: 
+        return("L"), 404
     
 
 
@@ -90,6 +96,7 @@ def List_Messages():
     for m in Messages:
         Printable_Messages.append(m)
     return Printable_Messages, 200
+    
 
 
 
