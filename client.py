@@ -2,14 +2,17 @@ import requests
 import json
 Token = {}
 
-def main_menu():
+def Main_menu():
     print("\nMain Menu:")
     print("1. Register")
     print("2. Login")
     print("3. Exit")
+    
 
-def message_menu():
-    print("4. Logout")
+def User_menu():
+    u = Choose_Users()
+    print(u)
+    List_Messages(u)
 
 
 def Register():
@@ -50,7 +53,6 @@ def Login():
     if response.status_code == 200:
         Token = response.json()
         print("User Logged in succesfully")
-        Choose_Users()
         return(True) 
     return(False)
 
@@ -67,28 +69,46 @@ def Choose_Users():
     print("Whom do you want to communicate with?")
     c = int(input())
     c = c-1   
-    print(Python_List[c])
+    return(Python_List[c]) 
 
     
 
 
-def Send_Message(msg):
+def Send_Message(msg,u):
     global Token
     # Reciever = 'users.json'
-    print(Token)
     url = "http://localhost:5000/messages"
-    payload = {"To": "Python_List[c]", "Token": Token, "Message": msg}
+    payload = {"To": u, "Token": Token, "Message": msg}
     response = requests.post(url, json=payload)
     if response.status_code == 201:
         print(response.json())
 
 
-def List_Messages():
+def List_Messages(u):
     url = "http://localhost:5000/messages"
-    payload = {"Token": Token}
+    payload = {"Token": Token, "User": u }
     response = requests.get(url, json=payload)
     if response.status_code == 200:
         print(json.dumps(response.json() , indent=4))
+
+
+
+def Menu(u):
+    while True:
+        print("1.Send Message")
+        print("2.Refresh")
+        print("3.Exit") 
+        choice = input("Choose an option: ")
+        if choice == '1':
+            messages = input("Enter message:")
+            Send_Message(messages,u)
+        elif choice == '2':
+            List_Messages(u)
+        elif choice == '3':
+            print("Exit")
+            return()
+        else:
+            print("Invalid choice,try again.")
 
 
 
@@ -96,7 +116,7 @@ def main():
     logged_in = False
     while True:
         if not logged_in:
-            main_menu()
+            Main_menu()
             choice = input("Choose an option (1-3): ")
             if choice == '1':
                 Register()
@@ -107,21 +127,10 @@ def main():
                 break
             else:
                 print("Invalid choice, try again.")
-        # else:
-        #     message_menu()
-        #     choice = input("Choose an option (1-4): ")
-        #     if choice == '1':
-        #         messages = input("Enter message:")
-        #         Send_Message(messages)
-        #     elif choice == '2':
-        #         List_Messages()
-        #     elif choice == '3':
-        #         List_Users()
-        #     elif choice == '4':
-        #         print("Exit")
-        #         break
-        # else:
-        #     print("Invalid choice,try again.")
+        else:
+            u = User_menu()
+            Menu(u)
+
 
 
 

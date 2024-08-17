@@ -78,7 +78,6 @@ def Send_Message():
                 "From": User_record["username"],
                 "Message": data["Message"]
     }
-    
     x = collection1.insert_one(record)
     return jsonify("Message has been sent.") , 201
     
