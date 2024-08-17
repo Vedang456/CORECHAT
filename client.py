@@ -9,10 +9,6 @@ def main_menu():
     print("3. Exit")
 
 def message_menu():
-    print("\nMessage Menu:")
-    print("1. Send message")
-    print("2. List Messages")
-    print("3. List Users")
     print("4. Logout")
 
 
@@ -53,19 +49,25 @@ def Login():
     response = requests.post(url, json= payload)
     if response.status_code == 200:
         Token = response.json()
-        print(Token)
-        # with open('Login.json', "w") as file:
-            # json.dump(response.json(),file)
         print("User Logged in succesfully")
+        Choose_Users()
         return(True) 
     return(False)
 
 
     
-def List_Users():
+def Choose_Users():
+    i = 1
     url = "http://localhost:5000/Users"
     response = requests.get(url)
-    print(json.dumps(response.json(), indent=4))
+    Python_List = json.loads(response.content)
+    for p in Python_List:
+        print(i, ":", p)
+        i += 1
+    print("Whom do you want to communicate with?")
+    c = int(input())
+    c = c-1   
+    print(Python_List[c])
 
     
 
@@ -75,7 +77,7 @@ def Send_Message(msg):
     # Reciever = 'users.json'
     print(Token)
     url = "http://localhost:5000/messages"
-    payload = {"To": 'Vedang', "Token": Token, "Message": msg}
+    payload = {"To": "Python_List[c]", "Token": Token, "Message": msg}
     response = requests.post(url, json=payload)
     if response.status_code == 201:
         print(response.json())
@@ -105,21 +107,21 @@ def main():
                 break
             else:
                 print("Invalid choice, try again.")
-        else:
-            message_menu()
-            choice = input("Choose an option (1-4): ")
-            if choice == '1':
-                messages = input("Enter message:")
-                Send_Message(messages)
-            elif choice == '2':
-                List_Messages()
-            elif choice == '3':
-                List_Users()
-            elif choice == '4':
-                print("Exit")
-                break
-            else:
-                print("Invalid choice,try again.")
+        # else:
+        #     message_menu()
+        #     choice = input("Choose an option (1-4): ")
+        #     if choice == '1':
+        #         messages = input("Enter message:")
+        #         Send_Message(messages)
+        #     elif choice == '2':
+        #         List_Messages()
+        #     elif choice == '3':
+        #         List_Users()
+        #     elif choice == '4':
+        #         print("Exit")
+        #         break
+        # else:
+        #     print("Invalid choice,try again.")
 
 
 

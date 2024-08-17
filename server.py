@@ -30,7 +30,7 @@ def Register():
         return "This user already exists" , 409
     else:
         y = collection2.insert_one(data)
-        return jsonify(y + "Added Succesfully") , 201
+        return jsonify("Added Succesfully") , 201
 
 
 @app.route("/Users",methods = ['GET'])
