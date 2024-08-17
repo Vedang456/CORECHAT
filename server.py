@@ -90,13 +90,21 @@ def Send_Message():
 
 @app.route("/messages",methods = ['GET'])
 def List_Messages():
-    collection1.find
+    data = request.json
+    Token = data["Token"]
+    From_User = collection2.find_one({"RegisterID": Token["RegisterID"]})
+    To_User = collection2.find_one({"username": data["User"]})
+    Messages = collection1.find({
+    "$or": [
+        {"To": From_User["username"], "From": To_User["username"]},
+        {"To": To_User["username"], "From": From_User["username"]}
+    ] },{"_id":0}).sort("timestamp", 1)
     Printable_Messages = []
-    Messages = list(collection1.find({},{"_id":0}))
     for m in Messages:
         Printable_Messages.append(m)
     return Printable_Messages, 200
     
+
 
 
 
