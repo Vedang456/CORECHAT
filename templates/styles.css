@@ -1,0 +1,131 @@
+body {
+    background-color: rgb(39, 183, 240);
+}
+
+.nav-tabs {
+    text-align: right;
+}
+
+button {
+    background-color: rgb(0, 0, 0);
+    margin-top: 10px;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+h1 {
+    text-align: center;
+    height: 100px;
+}
+
+p {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.Page {
+    background-color: aquamarine;
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding: 50px;
+    border-color: antiquewhite;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.Register {
+    background-color: aquamarine;
+    margin:4% auto;
+    padding: 20px; /* Added padding for spacing within the box */
+    border-radius: 10px; /* Rounded corners */
+    width: 300px; /* Same width as Login for consistency */
+}
+
+.Register-form {
+    display: flex; /* Flexbox for layout */
+    flex-direction: column; /* Stacks items vertically */
+    align-items: center; /* Centers items horizontally */
+    gap: 10px; /* Adds space between input fields and button */
+    text-align: center; /* Centers text */
+}
+
+.Register-form input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px; /* Adds a small margin around each input */
+    width: calc(100% - 20px); /* Full width of container with spacing */
+}
+
+.Register-form button {
+    background-color: rgb(0, 0, 0);
+    border-radius: 10%;
+    cursor: pointer;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    width: 100%; /* Full width of container */
+}
+
+.Register-form button a {
+    color: white;
+    text-decoration: none;
+}
+
+.Register-form button:hover {
+    background-color: #45a049;
+}
+
+button a {
+    color: white;
+    text-decoration: none;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.Login {
+    background-color: aquamarine;
+    width: 300px;
+    margin: 4% auto; /* Center the Login box horizontally */
+    padding: 20px; /* Added padding for spacing within the box */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.Login-form {
+    display: flex; /* Flexbox for layout */
+    flex-direction: column; /* Stacks items vertically */
+    align-items: center; /* Centers items horizontally */
+    gap: 10px; /* Adds space between input fields and button */
+    text-align: center; /* Centers text */
+}
+
+.Login-form input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px; /* Adds a small margin around each input */
+    width: calc(100% - 20px); /* Full width of container with spacing */
+}
+
+.Login-form button {
+    background-color: rgb(0, 0, 0);
+    border-radius: 10%;
+    cursor: pointer;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    width: 100%; /* Full width of container */
+}
+
+.Login-form button a {
+    color: white;
+    text-decoration: none;
+}
+
+.Login-form button:hover {
+    background-color: #45a049;
+}
