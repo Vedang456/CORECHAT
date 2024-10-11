@@ -1,0 +1,52 @@
+.Register {
+    background-color: aquamarine;
+    margin:4% auto;
+    padding: 20px; /* Added padding for spacing within the box */
+    border-radius: 10px; /* Rounded corners */
+    width: 300px; /* Same width as Login for consistency */
+}
+
+.Register-form {
+    display: flex; /* Flexbox for layout */
+    flex-direction: column; /* Stacks items vertically */
+    align-items: center; /* Centers items horizontally */
+    gap: 10px; /* Adds space between input fields and button */
+    text-align: center; /* Centers text */
+}
+
+.Register-form input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px; /* Adds a small margin around each input */
+    width: calc(100% - 20px); /* Full width of container with spacing */
+}
+
+.Register-form button {
+    background-color: rgb(0, 0, 0);
+    border-radius: 10%;
+    cursor: pointer;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    width: 100%; /* Full width of container */
+}
+
+.Register-form button a {
+    color: white;
+    text-decoration: none;
+}
+
+.Register-form button:hover {
+    background-color: #45a049;
+}
+
+button a {
+    color: white;
+    text-decoration: none;
+}
+
+button:hover {
+    background-color: #45a049;
+}

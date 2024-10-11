@@ -1,0 +1,35 @@
+body {
+  background-color: rgb(39, 183, 240);
+}
+
+.nav-tabs {
+  text-align: right;
+}
+
+button {
+  background-color: rgb(0, 0, 0);
+  margin-top: 10px;
+  border-radius: 10%;
+  cursor: pointer;
+}
+
+h1 {
+  text-align: center;
+  height: 100px;
+}
+
+p {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.Page {
+  background-color: aquamarine;
+  margin-top: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+  padding: 50px;
+  border-color: antiquewhite;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
